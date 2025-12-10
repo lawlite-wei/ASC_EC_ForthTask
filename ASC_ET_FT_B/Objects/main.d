@@ -31,3 +31,7 @@
 .\objects\main.o: .\System\Delay.h
 .\objects\main.o: .\Hardware\OLED.h
 .\objects\main.o: .\Hardware\OLED_Data.h
+.\objects\main.o: .\Hardware\Key.h
+.\objects\main.o: .\System\Timer.h
+.\objects\main.o: .\Hardware\MPU6050.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

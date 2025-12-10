@@ -2,9 +2,6 @@
 #include "Delay.h"
 #include "OLED.h"
 #include "Key.h"
-#include "LED.h"
-#include "PWM.h"
-#include "Servo.h"
 #include "Timer.h"
 #include "MPU6050.h"
 #include <math.h>
@@ -26,13 +23,10 @@ uint8_t TimeErrorFlag;
 
 int main(void)
 { 
-	LED_Init();
     OLED_Init();     
     Timer_Init();
-    Servo_Init();
     MPU6050_Init();
 	
-    
     OLED_Clear();
 	
     while (1)
@@ -45,17 +39,6 @@ int main(void)
 		OLED_ShowFloatNum(64,16,Roll,3,3,OLED_8X16);
 		OLED_ShowFloatNum(64,32,Pitch,3,3,OLED_8X16);
 		OLED_Update();
-		
-		Angle = Yaw;
-		Servo_SetAngle(Angle);
-		
-		if(Angle >= 150 && Angle <= 180)
-		{
-			LED1_ON();
-			Delay_ms(20);
-			LED1_OFF();
-			Delay_ms(20);
-		}
     }	
 }
 
