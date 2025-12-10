@@ -32,3 +32,5 @@
 .\objects\menu.o: Hardware\OLED.h
 .\objects\menu.o: Hardware\OLED_Data.h
 .\objects\menu.o: .\System\Delay.h
+.\objects\menu.o: Hardware\AD.h
+.\objects\menu.o: Hardware\W25Q64.h

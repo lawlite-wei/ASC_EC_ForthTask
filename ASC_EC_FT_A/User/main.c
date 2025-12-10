@@ -4,36 +4,58 @@
 #include "menu.h"
 #include "Key.h"
 #include "AD.h"
+#include "Timer.h"
+#include "W25Q64.h"
 
-/**
-  * 坐标轴定义：
-  * 左上角为(0, 0)点
-  * 横向向右为X轴，取值范围：0~127
-  * 纵向向下为Y轴，取值范围：0~63
-  * 
-  *       0             X轴           127 
-  *      .------------------------------->
-  *    0 |
-  *      |
-  *      |
-  *      |
-  *  Y轴 |
-  *      |
-  *      |
-  *      |
-  *   63 |
-  *      v
-  * 
-  */
+typedef enum {
+    MENU,
+    MENU_ADC,
+    MENU_Store,
+    MENU_IMU,
+} MenuState;
+
+MenuState current_menu = MENU;
 
 int main(void)
 {
 	OLED_Init();
 	Key_Init();
+	Timer_Init();
+	AD_Init();
+	W25Q64_Init();
 	
 	while (1)
 	{
-		menu();
+		switch(current_menu) {
+            case MENU: {
+                int result = menu();
+                if(result > 0) {
+                    current_menu = result;  // 切换到子菜单
+                }
+                break;
+            }
+            case MENU_ADC: {
+                int result = menu_ADC();
+                if(result == 0) {
+                    current_menu = MENU;  // 返回主菜单
+                }
+                break;
+            }
+            case MENU_Store: {
+                int result = menu_Store();
+                if(result == 0) {
+                    current_menu = MENU;
+                }
+                break;
+            }
+            case MENU_IMU: {
+                int result = menu_IMU();
+                if(result == 0) {
+                    current_menu = MENU;
+                }
+                break;
+            }
+        }
 	}
 }
 
