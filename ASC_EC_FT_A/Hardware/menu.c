@@ -65,12 +65,12 @@ int menu_ADC(void)
 	if(!menu_ADC_initialized)
 	{
 		OLED_Clear();
-		OLED_ShowString(0,16,"POT",OLED_8X16);
-		OLED_ShowString(0,32,"NTC",OLED_8X16);
-		OLED_ShowString(0,48,"LDR",OLED_8X16);
-		OLED_ShowNum(60,16,AD_Value[0],4,OLED_8X16);
-		OLED_ShowNum(60,32,AD_Value[1],4,OLED_8X16);
-		OLED_ShowNum(60,48,AD_Value[2],4,OLED_8X16);
+		OLED_ShowString(0,16,"POT   val:",OLED_8X16);
+		OLED_ShowString(0,32,"NTC   val:",OLED_8X16);
+		OLED_ShowString(0,48,"LDR   val:",OLED_8X16);
+		OLED_ShowNum(80,16,AD_Value[0],4,OLED_8X16);
+		OLED_ShowNum(80,32,AD_Value[1],4,OLED_8X16);
+		OLED_ShowNum(80,48,AD_Value[2],4,OLED_8X16);
 		OLED_Update();
 	}
 	
@@ -87,10 +87,31 @@ int menu_Store(void)
 	if(!menu_Store_initialized)
 	{
 		OLED_Clear();
-		OLED_ShowString(0,16,"POT",OLED_8X16);
-		OLED_ShowString(0,32,"NTC",OLED_8X16);
-		OLED_ShowString(0,48,"LDR",OLED_8X16);
+		OLED_ShowString(0,16,"POT   val:",OLED_8X16);
+		OLED_ShowString(0,32,"NTC   val:",OLED_8X16);
+		OLED_ShowString(0,48,"LDR   val:",OLED_8X16);
 		OLED_Update();
+	}
+	
+	if(Key_Check(KEY_3, KEY_LONG))
+	{
+		W25Q64_SectorErase(0x000000);
+		W25Q64_PageProgram(0x000000, AD_Value, 3);
+		W25Q64_ReadData(0x000000, W25Q64_Read, 3);
+		OLED_ShowNum(80,16,W25Q64_Read[0],4,OLED_8X16);
+		OLED_ShowNum(80,32,W25Q64_Read[1],4,OLED_8X16);
+		OLED_ShowNum(80,48,W25Q64_Read[2],4,OLED_8X16);
+		OLED_Update();
+	}
+	
+	if(Key_Check(KEY_1, KEY_DOWN))
+	{
+		W25Q64_SectorErase(0x000000);
+		
+		OLED_ShowNum(80,16,0,4,OLED_8X16);
+        OLED_ShowNum(80,32,0,4,OLED_8X16);
+        OLED_ShowNum(80,48,0,4,OLED_8X16);
+        OLED_Update();
 	}
 	
 	if(Key_Check(KEY_4, KEY_DOWN)) {

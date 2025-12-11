@@ -2,6 +2,8 @@
 #include "MySPI.h"
 #include "W25Q64_Ins.h"
 
+uint16_t W25Q64_Read[3];
+
 void W25Q64_Init(void)
 {
 	MySPI_Init();
@@ -42,7 +44,7 @@ void W25Q64_WaitBusy(void)
 	MySPI_Stop();
 }
 
-void W25Q64_PageProgram(uint32_t Address, uint8_t *DataArray, uint16_t Count)
+void W25Q64_PageProgram(uint32_t Address, uint16_t *DataArray, uint16_t Count)
 {
 	uint16_t i;
 	
@@ -76,7 +78,7 @@ void W25Q64_SectorErase(uint32_t Address)
 	W25Q64_WaitBusy();
 }
 
-void W25Q64_ReadData(uint32_t Address, uint8_t *DataArray, uint32_t Count)
+void W25Q64_ReadData(uint32_t Address, uint16_t *DataArray, uint32_t Count)
 {
 	uint32_t i;
 	MySPI_Start();
