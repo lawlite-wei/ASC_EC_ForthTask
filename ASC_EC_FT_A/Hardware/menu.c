@@ -87,15 +87,17 @@ int menu_Store(void)
 	if(!menu_Store_initialized)
 	{
 		OLED_Clear();
+		OLED_ShowNum(80,16,0,4,OLED_8X16);
+        OLED_ShowNum(80,32,0,4,OLED_8X16);
+        OLED_ShowNum(80,48,0,4,OLED_8X16);
 		OLED_ShowString(0,16,"POT   val:",OLED_8X16);
 		OLED_ShowString(0,32,"NTC   val:",OLED_8X16);
 		OLED_ShowString(0,48,"LDR   val:",OLED_8X16);
 		OLED_Update();
 	}
 	
-	if(Key_Check(KEY_3, KEY_LONG))
+	if(Key_Check(KEY_3, KEY_REPEAT))
 	{
-		W25Q64_SectorErase(0x000000);
 		W25Q64_PageProgram(0x000000, AD_Value, 3);
 		W25Q64_ReadData(0x000000, W25Q64_Read, 3);
 		OLED_ShowNum(80,16,W25Q64_Read[0],4,OLED_8X16);
@@ -106,8 +108,6 @@ int menu_Store(void)
 	
 	if(Key_Check(KEY_1, KEY_DOWN))
 	{
-		W25Q64_SectorErase(0x000000);
-		
 		OLED_ShowNum(80,16,0,4,OLED_8X16);
         OLED_ShowNum(80,32,0,4,OLED_8X16);
         OLED_ShowNum(80,48,0,4,OLED_8X16);

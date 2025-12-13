@@ -24,6 +24,7 @@ int main(void)
 	AD_Init();
 	W25Q64_Init();
 	
+	
 	while (1)
 	{
 		switch(current_menu) {
