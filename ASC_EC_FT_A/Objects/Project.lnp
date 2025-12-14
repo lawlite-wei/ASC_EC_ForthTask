@@ -32,6 +32,7 @@
 ".\objects\ad.o"
 ".\objects\key.o"
 ".\objects\menu.o"
+".\objects\serial.o"
 ".\objects\myspi.o"
 ".\objects\w25q64.o"
 ".\objects\main.o"

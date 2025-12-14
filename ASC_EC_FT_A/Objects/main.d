@@ -36,3 +36,5 @@
 .\objects\main.o: .\Hardware\AD.h
 .\objects\main.o: .\System\Timer.h
 .\objects\main.o: .\Hardware\W25Q64.h
+.\objects\main.o: .\Hardware\Serial.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

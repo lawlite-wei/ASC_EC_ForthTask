@@ -4,6 +4,7 @@
 #include "Key.h"
 #include "Timer.h"
 #include "MPU6050.h"
+#include "Serial.h"
 #include <math.h>
 
 int16_t AX, AY, AZ, GX, GY, GZ;
@@ -26,7 +27,7 @@ int main(void)
     OLED_Init();     
     Timer_Init();
     MPU6050_Init();
-	
+	Serial_Init();
     OLED_Clear();
 	
     while (1)
@@ -39,6 +40,7 @@ int main(void)
 		OLED_ShowFloatNum(64,16,Roll,3,3,OLED_8X16);
 		OLED_ShowFloatNum(64,32,Pitch,3,3,OLED_8X16);
 		OLED_Update();
+		
     }	
 }
 

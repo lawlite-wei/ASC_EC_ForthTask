@@ -6,6 +6,7 @@
 #include "AD.h"
 #include "Timer.h"
 #include "W25Q64.h"
+#include "Serial.h"
 
 typedef enum {
     MENU,
@@ -23,6 +24,7 @@ int main(void)
 	Timer_Init();
 	AD_Init();
 	W25Q64_Init();
+	Serial_Init();
 	
 	
 	while (1)

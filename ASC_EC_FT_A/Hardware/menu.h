@@ -9,6 +9,7 @@ int menu(void);
 int menu_ADC(void);
 int menu_Store(void);
 int menu_IMU(void);
+int USART_flag(void);
 
 
 #endif

@@ -34,3 +34,5 @@
 .\objects\menu.o: .\System\Delay.h
 .\objects\menu.o: Hardware\AD.h
 .\objects\menu.o: Hardware\W25Q64.h
+.\objects\menu.o: Hardware\Serial.h
+.\objects\menu.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
