@@ -35,4 +35,5 @@
 .\objects\main.o: .\Hardware\Key.h
 .\objects\main.o: .\Hardware\AD.h
 .\objects\main.o: .\System\Timer.h
+.\objects\main.o: .\Hardware\Serial.h
 .\objects\main.o: .\Hardware\W25Q64.h

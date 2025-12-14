@@ -4,6 +4,7 @@
 #include "Key.h"
 #include "Timer.h"
 #include "MPU6050.h"
+#include "Serial.h"
 #include <math.h>
 
 int16_t AX, AY, AZ, GX, GY, GZ;
@@ -21,12 +22,17 @@ float Pitch;			//融合后的俯仰角
 
 uint8_t TimeErrorFlag;
 
+int16_t float_to_int16(float angle) {
+    // 将角度放大100倍后转换为整数，保留2位小数
+    return (int16_t)(angle * 100.0f);
+}
+
 int main(void)
 { 
     OLED_Init();     
     Timer_Init();
     MPU6050_Init();
-	
+	Serial_Init();
     OLED_Clear();
 	
     while (1)
@@ -39,6 +45,24 @@ int main(void)
 		OLED_ShowFloatNum(64,16,Roll,3,3,OLED_8X16);
 		OLED_ShowFloatNum(64,32,Pitch,3,3,OLED_8X16);
 		OLED_Update();
+		
+		
+		int16_t yaw_value = float_to_int16(Yaw);      // 偏航角
+		int16_t pitch_value = float_to_int16(Pitch);  // 俯仰角
+		int16_t roll_value = float_to_int16(Roll);    // 横滚角
+		
+		uint8_t tx_buffer[6]; 
+	
+		
+		// 数据部分：顺序为Yaw, Pitch, Roll
+		tx_buffer[0] = yaw_value & 0xFF;         // Yaw低字节
+		tx_buffer[1] = (yaw_value >> 8) & 0xFF;  // Yaw高字节
+		tx_buffer[2] = pitch_value & 0xFF;       // Pitch低字节
+		tx_buffer[3] = (pitch_value >> 8) & 0xFF;// Pitch高字节
+		tx_buffer[4] = roll_value & 0xFF;        // Roll低字节
+		tx_buffer[5] = (roll_value >> 8) & 0xFF; // Roll高字节
+		
+		Serial_SendArray(tx_buffer, 6);
     }	
 }
 

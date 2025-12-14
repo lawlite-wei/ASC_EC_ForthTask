@@ -34,3 +34,5 @@
 .\objects\menu.o: .\System\Delay.h
 .\objects\menu.o: Hardware\AD.h
 .\objects\menu.o: Hardware\W25Q64.h
+.\objects\menu.o: Hardware\menu.h
+.\objects\menu.o: Hardware\Serial.h

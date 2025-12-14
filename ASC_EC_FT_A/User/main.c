@@ -5,6 +5,7 @@
 #include "Key.h"
 #include "AD.h"
 #include "Timer.h"
+#include "Serial.h"
 #include "W25Q64.h"
 
 typedef enum {
@@ -23,7 +24,7 @@ int main(void)
 	Timer_Init();
 	AD_Init();
 	W25Q64_Init();
-	
+	Serial_Init();
 	
 	while (1)
 	{
